@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from shop import views
+from django.conf import settings #new
+from django.conf.urls.static import static #new
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +28,5 @@ urlpatterns = [
     path('account/login/', views.signinView, name='signin'),
     path('account/logout/', views.signoutView, name='signout'),
 ]
-
+if settings.DEBUG: #new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
